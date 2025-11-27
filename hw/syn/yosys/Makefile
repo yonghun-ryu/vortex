@@ -5,7 +5,6 @@ SRC_DIR := $(VORTEX_HOME)/hw/syn/yosys
 
 TOP_LEVEL_ENTITY ?= Vortex
 PREFIX ?= build
-NUM_CORES ?= 1
 
 SCRIPT_DIR := $(VORTEX_HOME)/hw/scripts
 RTL_DIR := $(VORTEX_HOME)/hw/rtl
@@ -23,6 +22,7 @@ DBG_TRACE_FLAGS += -DDBG_TRACE_MEM
 DBG_TRACE_FLAGS += -DDBG_TRACE_CACHE
 DBG_TRACE_FLAGS += -DDBG_TRACE_AFU
 DBG_TRACE_FLAGS += -DDBG_TRACE_GBAR
+DBG_TRACE_FLAGS += -DDBG_TRACE_TCU
 
 # Control logic analyzer monitors
 DBG_SCOPE_FLAGS += -DDBG_SCOPE_AFU
@@ -30,7 +30,7 @@ DBG_SCOPE_FLAGS += -DDBG_SCOPE_ISSUE
 DBG_SCOPE_FLAGS += -DDBG_SCOPE_FETCH
 DBG_SCOPE_FLAGS += -DDBG_SCOPE_LSU
 
-
+ifdef NUM_CORES
 # cluster configuration
 CONFIGS_1c  := -DNUM_CLUSTERS=1 -DNUM_CORES=1
 CONFIGS_2c  := -DNUM_CLUSTERS=1 -DNUM_CORES=2
@@ -40,10 +40,11 @@ CONFIGS_16c	:= -DNUM_CLUSTERS=1 -DNUM_CORES=16 -DL2_ENABLE
 CONFIGS_32c := -DNUM_CLUSTERS=2 -DNUM_CORES=16 -DL2_ENABLE
 CONFIGS_64c := -DNUM_CLUSTERS=4 -DNUM_CORES=16 -DL2_ENABLE
 CONFIGS += $(CONFIGS_$(NUM_CORES)c)
+endif
 
 # include paths
 FPU_INCLUDE = -I$(RTL_DIR)/fpu
-ifneq (,$(findstring FPU_FPNEW,$(CONFIGS)))
+ifneq (,$(findstring -DFPU_FPNEW, $(CONFIGS)))
 	FPU_INCLUDE += -J$(THIRD_PARTY_DIR)/cvfpu/src/common_cells/include -J$(THIRD_PARTY_DIR)/cvfpu/src/common_cells/src -J$(THIRD_PARTY_DIR)/cvfpu/src/fpu_div_sqrt_mvp/hdl -J$(THIRD_PARTY_DIR)/cvfpu/src
 endif
 RTL_INCLUDE = -I$(RTL_DIR) -I$(RTL_DIR)/libs -I$(RTL_DIR)/interfaces -I$(RTL_DIR)/core -I$(RTL_DIR)/mem -I$(RTL_DIR)/cache

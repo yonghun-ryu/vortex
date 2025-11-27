@@ -1,0 +1,36 @@
+main.o: /home/yonghun/vortex/tests/opencl/spmv/main.cc \
+ /home/yonghun/tools/pocl/include/CL/cl.h \
+ /home/yonghun/tools/pocl/include/CL/cl_version.h \
+ /home/yonghun/tools/pocl/include/CL/cl_platform.h \
+ /home/yonghun/tools/pocl/include/CL/cl_ext.h \
+ /home/yonghun/vortex/tests/opencl/spmv/parboil.h \
+ /home/yonghun/vortex/tests/opencl/spmv/convert_dataset.h \
+ /home/yonghun/vortex/tests/opencl/spmv/file.h \
+ /home/yonghun/vortex/tests/opencl/spmv/gpu_info.h \
+ /home/yonghun/vortex/tests/opencl/spmv/ocl.h
+parboil_opencl.o: /home/yonghun/vortex/tests/opencl/spmv/parboil_opencl.c \
+ /home/yonghun/vortex/tests/opencl/spmv/parboil.h \
+ /home/yonghun/tools/pocl/include/CL/cl.h \
+ /home/yonghun/tools/pocl/include/CL/cl_version.h \
+ /home/yonghun/tools/pocl/include/CL/cl_platform.h \
+ /home/yonghun/vortex/tests/opencl/spmv/perfmon.h \
+ /home/yonghun/vortex/tests/opencl/spmv/perf_util.h
+args.o: /home/yonghun/vortex/tests/opencl/spmv/args.c \
+ /home/yonghun/vortex/tests/opencl/spmv/parboil.h \
+ /home/yonghun/tools/pocl/include/CL/cl.h \
+ /home/yonghun/tools/pocl/include/CL/cl_version.h \
+ /home/yonghun/tools/pocl/include/CL/cl_platform.h
+gpu_info.o: /home/yonghun/vortex/tests/opencl/spmv/gpu_info.c \
+ /home/yonghun/vortex/tests/opencl/spmv/gpu_info.h
+file.o: /home/yonghun/vortex/tests/opencl/spmv/file.c
+convert_dataset.o: \
+ /home/yonghun/vortex/tests/opencl/spmv/convert_dataset.c \
+ /home/yonghun/vortex/tests/opencl/spmv/convert_dataset.h \
+ /home/yonghun/vortex/tests/opencl/spmv/mmio.h
+mmio.o: /home/yonghun/vortex/tests/opencl/spmv/mmio.c \
+ /home/yonghun/vortex/tests/opencl/spmv/mmio.h
+ocl.o: /home/yonghun/vortex/tests/opencl/spmv/ocl.c \
+ /home/yonghun/tools/pocl/include/CL/cl.h \
+ /home/yonghun/tools/pocl/include/CL/cl_version.h \
+ /home/yonghun/tools/pocl/include/CL/cl_platform.h \
+ /home/yonghun/vortex/tests/opencl/spmv/ocl.h

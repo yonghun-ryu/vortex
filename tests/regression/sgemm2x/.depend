@@ -1,0 +1,3 @@
+main.o: /home/yonghun/vortex/tests/regression/sgemm2x/main.cpp \
+ /home/yonghun/vortex/runtime/include/vortex.h \
+ /home/yonghun/vortex/tests/regression/sgemm2x/common.h

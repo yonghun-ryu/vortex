@@ -1,0 +1,6 @@
+main.o: /home/yonghun/vortex/tests/opencl/bfs/main.cc \
+ /home/yonghun/vortex/tests/opencl/bfs/CLHelper.h \
+ /home/yonghun/tools/pocl/include/CL/cl.h \
+ /home/yonghun/tools/pocl/include/CL/cl_version.h \
+ /home/yonghun/tools/pocl/include/CL/cl_platform.h \
+ /home/yonghun/vortex/tests/opencl/bfs/util.h

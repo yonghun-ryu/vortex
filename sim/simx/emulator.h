@@ -19,6 +19,13 @@
 #include <stack>
 #include <mem.h>
 #include "types.h"
+#include "instr.h"
+#ifdef EXT_TCU_ENABLE
+#include "tensor_unit.h"
+#endif
+#ifdef EXT_V_ENABLE
+#include "vec_unit.h"
+#endif
 
 namespace vortex {
 
@@ -28,17 +35,60 @@ class Core;
 class Instr;
 class instr_trace_t;
 
+struct ipdom_entry_t {
+  ThreadMask  orig_tmask;
+  ThreadMask  else_tmask;
+  Word        PC;
+  bool        fallthrough;
+
+  ipdom_entry_t(const ThreadMask &orig_tmask, const ThreadMask &else_tmask, Word PC)
+    : orig_tmask (orig_tmask)
+    , else_tmask (else_tmask)
+    , PC         (PC)
+    , fallthrough(false)
+  {}
+};
+
+///////////////////////////////////////////////////////////////////////////////
+
+struct warp_t {
+  std::vector<std::vector<Word>>    ireg_file;
+  std::vector<std::vector<uint64_t>>freg_file;
+  std::deque<Instr::Ptr>            ibuffer;
+  std::stack<ipdom_entry_t>         ipdom_stack;
+  ThreadMask                        tmask;
+  Word                              PC;
+  Byte                              fcsr;
+  uint32_t                          uuid;
+
+  warp_t(uint32_t num_threads);
+
+  void reset(uint64_t startup_addr);
+};
+
+///////////////////////////////////////////////////////////////////////////////
+
+struct wspawn_t {
+  bool      valid;
+  uint32_t  num_warps;
+  Word      nextPC;
+};
+
+///////////////////////////////////////////////////////////////////////////////
+
 class Emulator {
 public:
-  Emulator(const Arch &arch,
-           const DCRS &dcrs,
-           Core* core);
+  Emulator(const Arch &arch, const DCRS &dcrs, Core* core);
 
   ~Emulator();
 
-  void clear();
+  void reset();
 
   void attach_ram(RAM* ram);
+
+#ifdef VM_ENABLE
+  void set_satp(uint64_t satp) ;
+#endif
 
   instr_trace_t* step();
 
@@ -54,50 +104,21 @@ public:
 
   int get_exitcode() const;
 
-private:
-
-  struct ipdom_entry_t {
-    ipdom_entry_t(const ThreadMask &orig_tmask, const ThreadMask &else_tmask, Word PC)
-      : orig_tmask (orig_tmask)
-      , else_tmask (else_tmask)
-      , PC         (PC)
-      , fallthrough(false)
-    {}
-
-    ThreadMask  orig_tmask;
-    ThreadMask  else_tmask;
-    Word        PC;
-    bool        fallthrough;
-  };
-
-  struct warp_t {
-    warp_t(const Arch& arch);
-    void clear(uint64_t startup_addr);
-
-    Word                              PC;
-    ThreadMask                        tmask;
-    std::vector<std::vector<Word>>    ireg_file;
-    std::vector<std::vector<uint64_t>>freg_file;
-    std::stack<ipdom_entry_t>         ipdom_stack;
-    Byte                              fcsr;
-    uint32_t                          uuid;
-  };
-
-  struct wspawn_t {
-    bool valid;
-    uint32_t num_warps;
-    Word nextPC;
-  };
-
-  std::shared_ptr<Instr> decode(uint32_t code) const;
-
-  void execute(const Instr &instr, uint32_t wid, instr_trace_t *trace);
-
-  void icache_read(void* data, uint64_t addr, uint32_t size);
-
   void dcache_read(void* data, uint64_t addr, uint32_t size);
 
   void dcache_write(const void* data, uint64_t addr, uint32_t size);
+
+private:
+
+  uint32_t fetch(uint32_t wid, uint64_t uuid);
+
+  void decode(uint32_t code, uint32_t wid, uint64_t uuid);
+
+  instr_trace_t* execute(const Instr &instr, uint32_t wid);
+
+  void fetch_registers(std::vector<reg_data_t>& out, uint32_t wid, uint32_t src_index, const RegOpd& reg);
+
+  void icache_read(void* data, uint64_t addr, uint32_t size);
 
   void dcache_amo_reserve(uint64_t addr);
 
@@ -107,17 +128,23 @@ private:
 
   void cout_flush();
 
-  Word get_csr(uint32_t addr, uint32_t tid, uint32_t wid);
+  Word get_csr(uint32_t addr, uint32_t wid, uint32_t tid);
 
-  void set_csr(uint32_t addr, Word value, uint32_t tid, uint32_t wid);
+  void set_csr(uint32_t addr, Word value, uint32_t wid, uint32_t tid);
 
-  uint32_t get_fpu_rm(uint32_t func3, uint32_t tid, uint32_t wid);
+  uint32_t get_fpu_rm(uint32_t funct3, uint32_t wid, uint32_t tid);
 
-  void update_fcrs(uint32_t fflags, uint32_t tid, uint32_t wid);
+  void update_fcrs(uint32_t fflags, uint32_t wid, uint32_t tid);
+
+  // temporarily added for riscv-vector tests
+  // TODO: remove once ecall/ebreak are supported
+  void trigger_ecall();
+  void trigger_ebreak();
 
   const Arch& arch_;
   const DCRS& dcrs_;
   Core*       core_;
+
   std::vector<warp_t> warps_;
   WarpMask    active_warps_;
   WarpMask    stalled_warps_;
@@ -127,6 +154,16 @@ private:
   uint32_t    ipdom_size_;
   Word        csr_mscratch_;
   wspawn_t    wspawn_;
+
+#ifdef EXT_TCU_ENABLE
+  TensorUnit::Ptr tensor_unit_;
+#endif
+
+#ifdef EXT_V_ENABLE
+  VecUnit::Ptr vec_unit_;
+#endif
+
+  PoolAllocator<Instr, 64> instr_pool_;
 };
 
 }

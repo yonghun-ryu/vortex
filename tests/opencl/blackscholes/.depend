@@ -1,0 +1,54 @@
+main.o: /home/yonghun/vortex/tests/opencl/blackscholes/main.cc \
+ /home/yonghun/vortex/tests/opencl/blackscholes/oclUtils.h \
+ /home/yonghun/vortex/tests/opencl/blackscholes/shrUtils.h \
+ /home/yonghun/tools/pocl/include/CL/opencl.h \
+ /home/yonghun/tools/pocl/include/CL/cl.h \
+ /home/yonghun/tools/pocl/include/CL/cl_version.h \
+ /home/yonghun/tools/pocl/include/CL/cl_platform.h \
+ /home/yonghun/tools/pocl/include/CL/cl_gl.h \
+ /home/yonghun/tools/pocl/include/CL/cl_ext.h \
+ /home/yonghun/tools/pocl/include/CL/cl_ext_pocl.h \
+ /home/yonghun/vortex/tests/opencl/blackscholes/shrQATest.h \
+ /home/yonghun/vortex/tests/opencl/blackscholes/oclBlackScholes_common.h
+oclUtils.o: /home/yonghun/vortex/tests/opencl/blackscholes/oclUtils.cpp \
+ /home/yonghun/vortex/tests/opencl/blackscholes/oclUtils.h \
+ /home/yonghun/vortex/tests/opencl/blackscholes/shrUtils.h \
+ /home/yonghun/tools/pocl/include/CL/opencl.h \
+ /home/yonghun/tools/pocl/include/CL/cl.h \
+ /home/yonghun/tools/pocl/include/CL/cl_version.h \
+ /home/yonghun/tools/pocl/include/CL/cl_platform.h \
+ /home/yonghun/tools/pocl/include/CL/cl_gl.h \
+ /home/yonghun/tools/pocl/include/CL/cl_ext.h \
+ /home/yonghun/tools/pocl/include/CL/cl_ext_pocl.h
+shrUtils.o: /home/yonghun/vortex/tests/opencl/blackscholes/shrUtils.cpp \
+ /home/yonghun/vortex/tests/opencl/blackscholes/shrUtils.h \
+ /home/yonghun/vortex/tests/opencl/blackscholes/cmd_arg_reader.h \
+ /home/yonghun/vortex/tests/opencl/blackscholes/exception.h
+cmd_arg_reader.o: \
+ /home/yonghun/vortex/tests/opencl/blackscholes/cmd_arg_reader.cpp \
+ /home/yonghun/vortex/tests/opencl/blackscholes/cmd_arg_reader.h \
+ /home/yonghun/vortex/tests/opencl/blackscholes/exception.h
+oclBlackScholes_launcher.o: \
+ /home/yonghun/vortex/tests/opencl/blackscholes/oclBlackScholes_launcher.cpp \
+ /home/yonghun/vortex/tests/opencl/blackscholes/oclUtils.h \
+ /home/yonghun/vortex/tests/opencl/blackscholes/shrUtils.h \
+ /home/yonghun/tools/pocl/include/CL/opencl.h \
+ /home/yonghun/tools/pocl/include/CL/cl.h \
+ /home/yonghun/tools/pocl/include/CL/cl_version.h \
+ /home/yonghun/tools/pocl/include/CL/cl_platform.h \
+ /home/yonghun/tools/pocl/include/CL/cl_gl.h \
+ /home/yonghun/tools/pocl/include/CL/cl_ext.h \
+ /home/yonghun/tools/pocl/include/CL/cl_ext_pocl.h \
+ /home/yonghun/vortex/tests/opencl/blackscholes/oclBlackScholes_common.h
+oclBlackScholes_gold.o: \
+ /home/yonghun/vortex/tests/opencl/blackscholes/oclBlackScholes_gold.cpp \
+ /home/yonghun/vortex/tests/opencl/blackscholes/oclBlackScholes_common.h \
+ /home/yonghun/vortex/tests/opencl/blackscholes/oclUtils.h \
+ /home/yonghun/vortex/tests/opencl/blackscholes/shrUtils.h \
+ /home/yonghun/tools/pocl/include/CL/opencl.h \
+ /home/yonghun/tools/pocl/include/CL/cl.h \
+ /home/yonghun/tools/pocl/include/CL/cl_version.h \
+ /home/yonghun/tools/pocl/include/CL/cl_platform.h \
+ /home/yonghun/tools/pocl/include/CL/cl_gl.h \
+ /home/yonghun/tools/pocl/include/CL/cl_ext.h \
+ /home/yonghun/tools/pocl/include/CL/cl_ext_pocl.h

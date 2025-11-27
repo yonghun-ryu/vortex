@@ -1,0 +1,15 @@
+main.o: /home/yonghun/vortex/tests/opencl/kmeans/main.cc \
+ /home/yonghun/vortex/tests/opencl/kmeans/kmeans.h \
+ /home/yonghun/tools/pocl/include/CL/cl.h \
+ /home/yonghun/tools/pocl/include/CL/cl_version.h \
+ /home/yonghun/tools/pocl/include/CL/cl_platform.h
+read_input.o: /home/yonghun/vortex/tests/opencl/kmeans/read_input.c \
+ /home/yonghun/vortex/tests/opencl/kmeans/kmeans.h
+rmse.o: /home/yonghun/vortex/tests/opencl/kmeans/rmse.c \
+ /home/yonghun/vortex/tests/opencl/kmeans/kmeans.h
+kmeans_clustering.o: \
+ /home/yonghun/vortex/tests/opencl/kmeans/kmeans_clustering.c \
+ /home/yonghun/vortex/tests/opencl/kmeans/kmeans.h
+cluster.o: /home/yonghun/vortex/tests/opencl/kmeans/cluster.c \
+ /home/yonghun/vortex/tests/opencl/kmeans/kmeans.h
+getopt.o: /home/yonghun/vortex/tests/opencl/kmeans/getopt.c

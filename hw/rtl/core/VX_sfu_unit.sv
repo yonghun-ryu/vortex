@@ -21,8 +21,8 @@ module VX_sfu_unit import VX_gpu_pkg::*; #(
     input wire              reset,
 
 `ifdef PERF_ENABLE
-    VX_mem_perf_if.slave    mem_perf_if,
-    VX_pipeline_perf_if.slave pipeline_perf_if,
+    input sysmem_perf_t     sysmem_perf,
+    input pipeline_perf_t   pipeline_perf,
 `endif
 
     input base_dcrs_t       base_dcrs,
@@ -33,6 +33,7 @@ module VX_sfu_unit import VX_gpu_pkg::*; #(
 `ifdef EXT_F_ENABLE
     VX_fpu_csr_if.slave     fpu_csr_if [`NUM_FPU_BLOCKS],
 `endif
+
     VX_commit_csr_if.slave  commit_csr_if,
     VX_sched_csr_if.slave   sched_csr_if,
 
@@ -49,12 +50,12 @@ module VX_sfu_unit import VX_gpu_pkg::*; #(
     localparam PE_IDX_CSRS  = 1;
 
     VX_execute_if #(
-        .NUM_LANES (NUM_LANES)
+        .data_t (sfu_exe_t)
     ) per_block_execute_if[BLOCK_SIZE]();
 
-    VX_commit_if #(
-        .NUM_LANES (NUM_LANES)
-    ) per_block_commit_if[BLOCK_SIZE]();
+    VX_result_if #(
+        .data_t (sfu_res_t)
+    ) per_block_result_if[BLOCK_SIZE]();
 
     VX_dispatch_unit #(
         .BLOCK_SIZE (BLOCK_SIZE),
@@ -68,18 +69,19 @@ module VX_sfu_unit import VX_gpu_pkg::*; #(
     );
 
     VX_execute_if #(
-        .NUM_LANES (NUM_LANES)
+        .data_t (sfu_exe_t)
     ) pe_execute_if[PE_COUNT]();
 
-    VX_commit_if#(
-        .NUM_LANES (NUM_LANES)
-    ) pe_commit_if[PE_COUNT]();
+    VX_result_if#(
+        .data_t (sfu_res_t)
+    ) pe_result_if[PE_COUNT]();
 
     reg [PE_SEL_BITS-1:0] pe_select;
     always @(*) begin
         pe_select = PE_IDX_WCTL;
-        if (`INST_SFU_IS_CSR(per_block_execute_if[0].data.op_type))
+        if (inst_sfu_is_csr(per_block_execute_if[0].data.op_type)) begin
             pe_select = PE_IDX_CSRS;
+        end
     end
 
     VX_pe_switch #(
@@ -93,24 +95,24 @@ module VX_sfu_unit import VX_gpu_pkg::*; #(
         .reset      (reset),
         .pe_sel     (pe_select),
         .execute_in_if (per_block_execute_if[0]),
-        .commit_out_if (per_block_commit_if[0]),
+        .result_out_if (per_block_result_if[0]),
         .execute_out_if (pe_execute_if),
-        .commit_in_if (pe_commit_if)
+        .result_in_if (pe_result_if)
     );
 
     VX_wctl_unit #(
-        .INSTANCE_ID ($sformatf("%s-wctl", INSTANCE_ID)),
+        .INSTANCE_ID (`SFORMATF(("%s-wctl", INSTANCE_ID))),
         .NUM_LANES (NUM_LANES)
     ) wctl_unit (
         .clk        (clk),
         .reset      (reset),
         .execute_if (pe_execute_if[PE_IDX_WCTL]),
         .warp_ctl_if(warp_ctl_if),
-        .commit_if  (pe_commit_if[PE_IDX_WCTL])
+        .result_if  (pe_result_if[PE_IDX_WCTL])
     );
 
     VX_csr_unit #(
-        .INSTANCE_ID ($sformatf("%s-csr", INSTANCE_ID)),
+        .INSTANCE_ID (`SFORMATF(("%s-csr", INSTANCE_ID))),
         .CORE_ID   (CORE_ID),
         .NUM_LANES (NUM_LANES)
     ) csr_unit (
@@ -121,8 +123,8 @@ module VX_sfu_unit import VX_gpu_pkg::*; #(
         .execute_if     (pe_execute_if[PE_IDX_CSRS]),
 
     `ifdef PERF_ENABLE
-        .mem_perf_if    (mem_perf_if),
-        .pipeline_perf_if(pipeline_perf_if),
+        .sysmem_perf    (sysmem_perf),
+        .pipeline_perf  (pipeline_perf),
     `endif
 
     `ifdef EXT_F_ENABLE
@@ -131,7 +133,7 @@ module VX_sfu_unit import VX_gpu_pkg::*; #(
 
         .sched_csr_if   (sched_csr_if),
         .commit_csr_if  (commit_csr_if),
-        .commit_if      (pe_commit_if[PE_IDX_CSRS])
+        .result_if      (pe_result_if[PE_IDX_CSRS])
     );
 
     VX_gather_unit #(
@@ -139,10 +141,10 @@ module VX_sfu_unit import VX_gpu_pkg::*; #(
         .NUM_LANES  (NUM_LANES),
         .OUT_BUF    (3)
     ) gather_unit (
-        .clk        (clk),
-        .reset      (reset),
-        .commit_in_if (per_block_commit_if),
-        .commit_out_if (commit_if)
+        .clk       (clk),
+        .reset     (reset),
+        .result_if (per_block_result_if),
+        .commit_if (commit_if)
     );
 
 endmodule

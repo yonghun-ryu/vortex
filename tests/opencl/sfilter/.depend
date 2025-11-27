@@ -1,0 +1,4 @@
+main.o: /home/yonghun/vortex/tests/opencl/sfilter/main.cc \
+ /home/yonghun/tools/pocl/include/CL/cl.h \
+ /home/yonghun/tools/pocl/include/CL/cl_version.h \
+ /home/yonghun/tools/pocl/include/CL/cl_platform.h

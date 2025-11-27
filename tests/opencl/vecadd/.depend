@@ -1,0 +1,9 @@
+main.o: /home/yonghun/vortex/tests/opencl/vecadd/main.cc \
+ /home/yonghun/tools/pocl/include/CL/opencl.h \
+ /home/yonghun/tools/pocl/include/CL/cl.h \
+ /home/yonghun/tools/pocl/include/CL/cl_version.h \
+ /home/yonghun/tools/pocl/include/CL/cl_platform.h \
+ /home/yonghun/tools/pocl/include/CL/cl_gl.h \
+ /home/yonghun/tools/pocl/include/CL/cl_ext.h \
+ /home/yonghun/tools/pocl/include/CL/cl_ext_pocl.h \
+ /home/yonghun/vortex/tests/opencl/vecadd/common.h
