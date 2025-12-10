@@ -346,34 +346,47 @@ public:
       global_mem_.release(addr);
       return err;
     });
-    *dev_addr = addr;
+    // Return physical address by adding Bank 0 base
+    *dev_addr = addr + 0x4000000000;
     return 0;
   }
 
   int mem_reserve(uint64_t dev_addr, uint64_t size, int flags) {
-    CHECK_ERR(global_mem_.reserve(dev_addr, size), {
+    // Strip Bank 0 base address to get local address
+    const uint64_t BANK0_BASE = 0x4000000000;
+    uint64_t local_addr = dev_addr;
+    if (dev_addr >= BANK0_BASE) {
+      local_addr = dev_addr - BANK0_BASE;
+    }
+    CHECK_ERR(global_mem_.reserve(local_addr, size), {
       return err;
     });
   #ifndef BANK_INTERLEAVE
     uint32_t bank_id;
-    CHECK_ERR(this->get_bank_info(dev_addr, &bank_id, nullptr), {
-      global_mem_.release(dev_addr);
+    CHECK_ERR(this->get_bank_info(local_addr, &bank_id, nullptr), {
+      global_mem_.release(local_addr);
       return err;
     });
     CHECK_ERR(get_buffer(bank_id, nullptr), {
-      global_mem_.release(dev_addr);
+      global_mem_.release(local_addr);
       return err;
     });
   #endif
-    CHECK_ERR(this->mem_access(dev_addr, size, flags), {
-      global_mem_.release(dev_addr);
+    CHECK_ERR(this->mem_access(local_addr, size, flags), {
+    global_mem_.release(local_addr);
       return err;
     });
     return 0;
   }
 
   int mem_free(uint64_t dev_addr) {
-    CHECK_ERR(global_mem_.release(dev_addr), {
+    // Strip Bank 0 base address to get local address
+    const uint64_t BANK0_BASE = 0x4000000000;
+    uint64_t local_addr = dev_addr;
+    if (dev_addr >= BANK0_BASE) {
+      local_addr = dev_addr - BANK0_BASE;
+    }
+    CHECK_ERR(global_mem_.release(local_addr), {
       return err;
     });
   #ifdef BANK_INTERLEAVE
@@ -387,7 +400,7 @@ public:
     }
   #else
     uint32_t bank_id;
-    CHECK_ERR(this->get_bank_info(dev_addr, &bank_id, nullptr), {
+    CHECK_ERR(this->get_bank_info(local_addr, &bank_id, nullptr), {
       return err;
     });
     auto it = xrtBuffers_.find(bank_id);
@@ -452,21 +465,35 @@ public:
     if (!is_aligned(dev_addr, CACHE_BLOCK_SIZE))
       return -1;
 
+    // Skip Upload Bypass Logic
+    bool skip_upload = (nullptr != std::getenv("VORTEX_RT_SKIP_UPLOAD"));
+    if (skip_upload) {
+        fprintf(stderr, "[VXDRV] Warning: Skipping upload 0x%lx size=%lu (VORTEX_RT_SKIP_UPLOAD set)\n", dev_addr, size);
+        return 0; // Return success immediately
+    }
+
+    // Strip Bank 0 base address to get local address
+    const uint64_t BANK0_BASE = 0x4000000000;
+    uint64_t local_addr = dev_addr;
+    if (dev_addr >= BANK0_BASE) {
+      local_addr = dev_addr - BANK0_BASE;
+    }
+
     auto asize = aligned_size(size, CACHE_BLOCK_SIZE);
-    uint64_t dev_addr_start = dev_addr;
+    uint64_t dev_addr_start = local_addr;
   if (dev_addr_start < 0x40000000 && 
      (nullptr == std::getenv("XCL_EMULATION_MODE") || 
       std::string(std::getenv("XCL_EMULATION_MODE")) == "hw_emu")) {
      //dev_addr_start += 0x44A00000;
   }
-  //printf("DEBUG: upload dev_addr=0x%lx, dev_addr_start=0x%lx, mode=%s\n", dev_addr, dev_addr_start, std::getenv("XCL_EMULATION_MODE") ? std::getenv("XCL_EMULATION_MODE") : "nullptr");
+  //fprintf(stderr,"DEBUG: upload dev_addr=0x%lx, dev_addr_start=0x%lx, mode=%s\n", dev_addr, dev_addr_start, std::getenv("XCL_EMULATION_MODE") ? std::getenv("XCL_EMULATION_MODE") : "nullptr");
   uintptr_t dev_addr_end = dev_addr_start + size;
     // bound checking
     if (dev_addr_end > global_mem_size_)
       return -1;
 
-    for (uint64_t end = dev_addr + asize; dev_addr < end;
-         dev_addr += CACHE_BLOCK_SIZE, host_ptr += CACHE_BLOCK_SIZE) {
+    for (uint64_t end = local_addr + asize; local_addr < end;
+         local_addr += CACHE_BLOCK_SIZE, host_ptr += CACHE_BLOCK_SIZE) {
     #ifdef BANK_INTERLEAVE
       asize = CACHE_BLOCK_SIZE;
     #else
@@ -475,7 +502,7 @@ public:
       uint32_t bo_index;
       uint64_t bo_offset;
       xrt_buffer_t xrtBuffer;
-      CHECK_ERR(this->get_bank_info(dev_addr, &bo_index, &bo_offset), {
+      CHECK_ERR(this->get_bank_info(local_addr, &bo_index, &bo_offset), {
         return err;
       });
       // Apply offset AFTER bank mapping
@@ -492,16 +519,21 @@ public:
       if (dev_addr < 0x40000000 && 
          (nullptr == std::getenv("XCL_EMULATION_MODE") || 
           std::string(std::getenv("XCL_EMULATION_MODE")) == "hw_emu")) {
-         bo_offset += 0x44A00000;
+         // bo_offset += 0x44A00000; // DISABLED: We use 0-based indexing now.
       }
       auto ptr = (uint8_t*)xrtBuffer.map();
-      //printf("DEBUG: upload 0x%lx ptr=%p *ptr=%02x bo_offset=0x%lx\n", dev_addr, ptr, *(ptr + bo_offset), bo_offset);
       std::memcpy(ptr + bo_offset, host_ptr, CACHE_BLOCK_SIZE);
+      
+      uint64_t phys_addr = xrtBuffer.address();
+      fprintf(stderr, "DEBUG: CPP_API upload bo_offset=0x%lx, xrtBOAddress=0x%lx\n", bo_offset, phys_addr);
+
       xrtBuffer.sync(XCL_BO_SYNC_BO_TO_DEVICE, CACHE_BLOCK_SIZE, bo_offset);
+      fprintf(stderr, "DEBUG: CPP_API upload sync complete\n");
     #else
       // Dual Write Strategy
       uint64_t bo_offset_secondary = bo_offset + 0x44A00000;
-      // printf("DEBUG: C-API upload 0x%lx bo_offset=0x%lx secondary=0x%lx\n", dev_addr, bo_offset, bo_offset_secondary);
+      // fprintf(stderr,"DEBUG: C-API upload 0x%lx bo_offset=0x%lx secondary=0x%lx\n", dev_addr, bo_offset, bo_offset_secondary);
+      
       
       // Write 1: Base Offset
       CHECK_ERR(xrtBOWrite(xrtBuffer, host_ptr, CACHE_BLOCK_SIZE, bo_offset), {
@@ -538,14 +570,21 @@ public:
     if (!is_aligned(dev_addr, CACHE_BLOCK_SIZE))
       return -1;
 
+    // Strip Bank 0 base address to get local address
+    const uint64_t BANK0_BASE = 0x4000000000;
+    uint64_t local_addr = dev_addr;
+    if (dev_addr >= BANK0_BASE) {
+      local_addr = dev_addr - BANK0_BASE;
+    }
+
     auto asize = aligned_size(size, CACHE_BLOCK_SIZE);
 
     // bound checking
-    if (dev_addr + asize > global_mem_size_)
+    if (local_addr + asize > global_mem_size_)
       return -1;
 
-    for (uint64_t end = dev_addr + asize; dev_addr < end;
-         dev_addr += CACHE_BLOCK_SIZE, host_ptr += CACHE_BLOCK_SIZE) {
+    for (uint64_t end = local_addr + asize; local_addr < end;
+         local_addr += CACHE_BLOCK_SIZE, host_ptr += CACHE_BLOCK_SIZE) {
     #ifdef BANK_INTERLEAVE
       asize = CACHE_BLOCK_SIZE;
     #else
@@ -554,7 +593,7 @@ public:
       uint32_t bo_index;
       uint64_t bo_offset;
       xrt_buffer_t xrtBuffer;
-      CHECK_ERR(this->get_bank_info(dev_addr, &bo_index, &bo_offset), {
+      CHECK_ERR(this->get_bank_info(local_addr, &bo_index, &bo_offset), {
         return err;
       });
       CHECK_ERR(this->get_buffer(bo_index, &xrtBuffer), {
@@ -571,7 +610,7 @@ public:
           std::string(std::getenv("XCL_EMULATION_MODE")) == "hw_emu")) {
          bo_offset_read += 0x44A00000;
       }
-      // printf("DEBUG: C-API download 0x%lx bo_offset=0x%lx read_offset=0x%lx\n", dev_addr, bo_offset, bo_offset_read);
+      // fprintf(stderr,"DEBUG: C-API download 0x%lx bo_offset=0x%lx read_offset=0x%lx\n", dev_addr, bo_offset, bo_offset_read);
 
       CHECK_ERR(xrtBOSync(xrtBuffer, XCL_BO_SYNC_BO_FROM_DEVICE, CACHE_BLOCK_SIZE, bo_offset_read), {
         dump_xrt_error(xrtDevice_, err);
@@ -587,7 +626,7 @@ public:
   }
 
   int start(uint64_t krnl_addr, uint64_t args_addr) {
-    //printf("DEBUG: start krnl_addr=0x%lx, args_addr=0x%lx\n", krnl_addr, args_addr);
+    //fprintf(stderr,"DEBUG: start krnl_addr=0x%lx, args_addr=0x%lx\n", krnl_addr, args_addr);
     // set kernel info
     CHECK_ERR(this->dcr_write(VX_DCR_BASE_STARTUP_ADDR0, krnl_addr & 0xffffffff), {
       return err;

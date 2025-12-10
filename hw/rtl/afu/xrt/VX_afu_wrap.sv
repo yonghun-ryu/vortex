@@ -292,8 +292,10 @@ module VX_afu_wrap import VX_gpu_pkg::*; #(
 	wire [M_AXI_MEM_ADDR_WIDTH-1:0] m_axi_mem_araddr_u [C_M_AXI_MEM_NUM_BANKS];
 
 	for (genvar i = 0; i < C_M_AXI_MEM_NUM_BANKS; ++i) begin : g_addressing
-    // Force offset for debugging
-    localparam [C_M_AXI_MEM_ADDR_WIDTH-1:0] AXI_MEM_OFFSET = 32'h44A00000;
+    // Force offset for debugging (Bank 1 Base Address)
+    // Force offset for debugging (Bank 0 Base Address)
+    // connectivity.cfg now forces all memory to DDR[0] (0x4000000000)
+    localparam [C_M_AXI_MEM_ADDR_WIDTH-1:0] AXI_MEM_OFFSET = 64'h0;
 		assign m_axi_mem_awaddr_a[i] = C_M_AXI_MEM_ADDR_WIDTH'(m_axi_mem_awaddr_u[i]) + C_M_AXI_MEM_ADDR_WIDTH'(0) + AXI_MEM_OFFSET;
 		assign m_axi_mem_araddr_a[i] = C_M_AXI_MEM_ADDR_WIDTH'(m_axi_mem_araddr_u[i]) + C_M_AXI_MEM_ADDR_WIDTH'(0) + AXI_MEM_OFFSET;
 	end
