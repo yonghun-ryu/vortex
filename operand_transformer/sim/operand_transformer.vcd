@@ -1,0 +1,1544 @@
+$date
+   Thu Dec 11 21:52:34 2025
+$end
+$version
+  2023.1
+$end
+$timescale
+  1ps
+$end
+$scope module tb_operand_transformer $end
+$var reg 1 ! clk $end
+$var reg 1 " rst_n $end
+$var reg 1 # valid_in $end
+$var reg 1 $ ready_in $end
+$var reg 386 % data_in $end
+$var reg 1 & ready_out $end
+$var reg 1 ' valid_out $end
+$var reg 256 ( data_out $end
+$scope module dut $end
+$var wire 1 ) clk $end
+$var wire 1 * rst_n $end
+$var wire 1 + valid_in $end
+$var reg 1 $ ready_in $end
+$var reg 386 % data_in $end
+$var wire 1 , ready_out $end
+$var reg 1 ' valid_out $end
+$var reg 256 ( data_out $end
+$var reg 1 - load_input $end
+$var reg 1 . we_temp_reg $end
+$var reg 1 / use_odd $end
+$var reg 1 0 we_output_reg $end
+$var reg 128 1 lane_res_even [127:0] $end
+$var reg 128 2 lane_res_odd [127:0] $end
+$var reg 2 3 cfg_buf $end
+$var reg 8 4 \gen_lanes[0].sel_scale  [7:0] $end
+$var reg 8 5 \gen_lanes[1].sel_scale  [7:0] $end
+$var reg 8 6 \gen_lanes[2].sel_scale  [7:0] $end
+$var reg 8 7 \gen_lanes[3].sel_scale  [7:0] $end
+$var reg 8 8 \gen_lanes[4].sel_scale  [7:0] $end
+$var reg 8 9 \gen_lanes[5].sel_scale  [7:0] $end
+$var reg 8 : \gen_lanes[6].sel_scale  [7:0] $end
+$var reg 8 ; \gen_lanes[7].sel_scale  [7:0] $end
+$var reg 8 < \gen_lanes[8].sel_scale  [7:0] $end
+$var reg 8 = \gen_lanes[9].sel_scale  [7:0] $end
+$var reg 8 > \gen_lanes[10].sel_scale  [7:0] $end
+$var reg 8 ? \gen_lanes[11].sel_scale  [7:0] $end
+$var reg 8 @ \gen_lanes[12].sel_scale  [7:0] $end
+$var reg 8 A \gen_lanes[13].sel_scale  [7:0] $end
+$var reg 8 B \gen_lanes[14].sel_scale  [7:0] $end
+$var reg 8 C \gen_lanes[15].sel_scale  [7:0] $end
+$scope module u_ctrl $end
+$var wire 1 ) clk $end
+$var wire 1 * rst_n $end
+$var wire 1 + valid_in $end
+$var reg 1 $ ready_in $end
+$var wire 1 , ready_out $end
+$var reg 1 ' valid_out $end
+$var reg 1 - load_input $end
+$var reg 1 / use_odd $end
+$var reg 1 . we_temp_reg $end
+$var reg 1 0 we_output_reg $end
+$var reg 3 D state $end
+$var reg 3 E next_state $end
+$upscope $end
+$scope module gen_lanes[0].u_lane $end
+$var wire 1 ) clk $end
+$var wire 1 * rst_n $end
+$var wire 1 F load_input $end
+$var wire 1 G iter_sel $end
+$var wire 1 H we_result $end
+$var wire 8 I elem_0_in [7:0] $end
+$var wire 8 J elem_1_in [7:0] $end
+$var wire 8 K micro_scale_in [7:0] $end
+$var reg 8 L res_0_out [7:0] $end
+$var reg 8 M res_1_out [7:0] $end
+$var reg 8 N elem_0_buf [7:0] $end
+$var reg 8 O elem_1_buf [7:0] $end
+$var reg 8 P scale_buf [7:0] $end
+$var reg 8 Q mux_elem [7:0] $end
+$var reg 8 R mult_result [7:0] $end
+$scope module u_mult $end
+$var wire 8 S element_in [7:0] $end
+$var wire 8 T scale_in [7:0] $end
+$var reg 8 R result_out [7:0] $end
+$var reg 4 U lead_one_pos [3:0] $end
+$var reg 1 V is_zero $end
+$scope begin Block45_8 $end
+$var reg 16 W target_msb_pos [15:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module gen_lanes[1].u_lane $end
+$var wire 1 ) clk $end
+$var wire 1 * rst_n $end
+$var wire 1 X load_input $end
+$var wire 1 Y iter_sel $end
+$var wire 1 Z we_result $end
+$var wire 8 [ elem_0_in [7:0] $end
+$var wire 8 \ elem_1_in [7:0] $end
+$var wire 8 ] micro_scale_in [7:0] $end
+$var reg 8 ^ res_0_out [15:8] $end
+$var reg 8 _ res_1_out [15:8] $end
+$var reg 8 ` elem_0_buf [7:0] $end
+$var reg 8 a elem_1_buf [7:0] $end
+$var reg 8 b scale_buf [7:0] $end
+$var reg 8 c mux_elem [7:0] $end
+$var reg 8 d mult_result [7:0] $end
+$scope module u_mult $end
+$var wire 8 e element_in [7:0] $end
+$var wire 8 f scale_in [7:0] $end
+$var reg 8 d result_out [7:0] $end
+$var reg 4 g lead_one_pos [3:0] $end
+$var reg 1 h is_zero $end
+$scope begin Block45_8 $end
+$var reg 16 i target_msb_pos [15:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module gen_lanes[2].u_lane $end
+$var wire 1 ) clk $end
+$var wire 1 * rst_n $end
+$var wire 1 j load_input $end
+$var wire 1 k iter_sel $end
+$var wire 1 l we_result $end
+$var wire 8 m elem_0_in [7:0] $end
+$var wire 8 n elem_1_in [7:0] $end
+$var wire 8 o micro_scale_in [7:0] $end
+$var reg 8 p res_0_out [23:16] $end
+$var reg 8 q res_1_out [23:16] $end
+$var reg 8 r elem_0_buf [7:0] $end
+$var reg 8 s elem_1_buf [7:0] $end
+$var reg 8 t scale_buf [7:0] $end
+$var reg 8 u mux_elem [7:0] $end
+$var reg 8 v mult_result [7:0] $end
+$scope module u_mult $end
+$var wire 8 w element_in [7:0] $end
+$var wire 8 x scale_in [7:0] $end
+$var reg 8 v result_out [7:0] $end
+$var reg 4 y lead_one_pos [3:0] $end
+$var reg 1 z is_zero $end
+$scope begin Block45_8 $end
+$var reg 16 { target_msb_pos [15:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module gen_lanes[3].u_lane $end
+$var wire 1 ) clk $end
+$var wire 1 * rst_n $end
+$var wire 1 | load_input $end
+$var wire 1 } iter_sel $end
+$var wire 1 ~ we_result $end
+$var wire 8 !! elem_0_in [7:0] $end
+$var wire 8 "! elem_1_in [7:0] $end
+$var wire 8 #! micro_scale_in [7:0] $end
+$var reg 8 $! res_0_out [31:24] $end
+$var reg 8 %! res_1_out [31:24] $end
+$var reg 8 &! elem_0_buf [7:0] $end
+$var reg 8 '! elem_1_buf [7:0] $end
+$var reg 8 (! scale_buf [7:0] $end
+$var reg 8 )! mux_elem [7:0] $end
+$var reg 8 *! mult_result [7:0] $end
+$scope module u_mult $end
+$var wire 8 +! element_in [7:0] $end
+$var wire 8 ,! scale_in [7:0] $end
+$var reg 8 *! result_out [7:0] $end
+$var reg 4 -! lead_one_pos [3:0] $end
+$var reg 1 .! is_zero $end
+$scope begin Block45_8 $end
+$var reg 16 /! target_msb_pos [15:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module gen_lanes[4].u_lane $end
+$var wire 1 ) clk $end
+$var wire 1 * rst_n $end
+$var wire 1 0! load_input $end
+$var wire 1 1! iter_sel $end
+$var wire 1 2! we_result $end
+$var wire 8 3! elem_0_in [7:0] $end
+$var wire 8 4! elem_1_in [7:0] $end
+$var wire 8 5! micro_scale_in [7:0] $end
+$var reg 8 6! res_0_out [39:32] $end
+$var reg 8 7! res_1_out [39:32] $end
+$var reg 8 8! elem_0_buf [7:0] $end
+$var reg 8 9! elem_1_buf [7:0] $end
+$var reg 8 :! scale_buf [7:0] $end
+$var reg 8 ;! mux_elem [7:0] $end
+$var reg 8 <! mult_result [7:0] $end
+$scope module u_mult $end
+$var wire 8 =! element_in [7:0] $end
+$var wire 8 >! scale_in [7:0] $end
+$var reg 8 <! result_out [7:0] $end
+$var reg 4 ?! lead_one_pos [3:0] $end
+$var reg 1 @! is_zero $end
+$scope begin Block45_8 $end
+$var reg 16 A! target_msb_pos [15:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module gen_lanes[5].u_lane $end
+$var wire 1 ) clk $end
+$var wire 1 * rst_n $end
+$var wire 1 B! load_input $end
+$var wire 1 C! iter_sel $end
+$var wire 1 D! we_result $end
+$var wire 8 E! elem_0_in [7:0] $end
+$var wire 8 F! elem_1_in [7:0] $end
+$var wire 8 G! micro_scale_in [7:0] $end
+$var reg 8 H! res_0_out [47:40] $end
+$var reg 8 I! res_1_out [47:40] $end
+$var reg 8 J! elem_0_buf [7:0] $end
+$var reg 8 K! elem_1_buf [7:0] $end
+$var reg 8 L! scale_buf [7:0] $end
+$var reg 8 M! mux_elem [7:0] $end
+$var reg 8 N! mult_result [7:0] $end
+$scope module u_mult $end
+$var wire 8 O! element_in [7:0] $end
+$var wire 8 P! scale_in [7:0] $end
+$var reg 8 N! result_out [7:0] $end
+$var reg 4 Q! lead_one_pos [3:0] $end
+$var reg 1 R! is_zero $end
+$scope begin Block45_8 $end
+$var reg 16 S! target_msb_pos [15:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module gen_lanes[6].u_lane $end
+$var wire 1 ) clk $end
+$var wire 1 * rst_n $end
+$var wire 1 T! load_input $end
+$var wire 1 U! iter_sel $end
+$var wire 1 V! we_result $end
+$var wire 8 W! elem_0_in [7:0] $end
+$var wire 8 X! elem_1_in [7:0] $end
+$var wire 8 Y! micro_scale_in [7:0] $end
+$var reg 8 Z! res_0_out [55:48] $end
+$var reg 8 [! res_1_out [55:48] $end
+$var reg 8 \! elem_0_buf [7:0] $end
+$var reg 8 ]! elem_1_buf [7:0] $end
+$var reg 8 ^! scale_buf [7:0] $end
+$var reg 8 _! mux_elem [7:0] $end
+$var reg 8 `! mult_result [7:0] $end
+$scope module u_mult $end
+$var wire 8 a! element_in [7:0] $end
+$var wire 8 b! scale_in [7:0] $end
+$var reg 8 `! result_out [7:0] $end
+$var reg 4 c! lead_one_pos [3:0] $end
+$var reg 1 d! is_zero $end
+$scope begin Block45_8 $end
+$var reg 16 e! target_msb_pos [15:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module gen_lanes[7].u_lane $end
+$var wire 1 ) clk $end
+$var wire 1 * rst_n $end
+$var wire 1 f! load_input $end
+$var wire 1 g! iter_sel $end
+$var wire 1 h! we_result $end
+$var wire 8 i! elem_0_in [7:0] $end
+$var wire 8 j! elem_1_in [7:0] $end
+$var wire 8 k! micro_scale_in [7:0] $end
+$var reg 8 l! res_0_out [63:56] $end
+$var reg 8 m! res_1_out [63:56] $end
+$var reg 8 n! elem_0_buf [7:0] $end
+$var reg 8 o! elem_1_buf [7:0] $end
+$var reg 8 p! scale_buf [7:0] $end
+$var reg 8 q! mux_elem [7:0] $end
+$var reg 8 r! mult_result [7:0] $end
+$scope module u_mult $end
+$var wire 8 s! element_in [7:0] $end
+$var wire 8 t! scale_in [7:0] $end
+$var reg 8 r! result_out [7:0] $end
+$var reg 4 u! lead_one_pos [3:0] $end
+$var reg 1 v! is_zero $end
+$scope begin Block45_8 $end
+$var reg 16 w! target_msb_pos [15:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module gen_lanes[8].u_lane $end
+$var wire 1 ) clk $end
+$var wire 1 * rst_n $end
+$var wire 1 x! load_input $end
+$var wire 1 y! iter_sel $end
+$var wire 1 z! we_result $end
+$var wire 8 {! elem_0_in [7:0] $end
+$var wire 8 |! elem_1_in [7:0] $end
+$var wire 8 }! micro_scale_in [7:0] $end
+$var reg 8 ~! res_0_out [71:64] $end
+$var reg 8 !" res_1_out [71:64] $end
+$var reg 8 "" elem_0_buf [7:0] $end
+$var reg 8 #" elem_1_buf [7:0] $end
+$var reg 8 $" scale_buf [7:0] $end
+$var reg 8 %" mux_elem [7:0] $end
+$var reg 8 &" mult_result [7:0] $end
+$scope module u_mult $end
+$var wire 8 '" element_in [7:0] $end
+$var wire 8 (" scale_in [7:0] $end
+$var reg 8 &" result_out [7:0] $end
+$var reg 4 )" lead_one_pos [3:0] $end
+$var reg 1 *" is_zero $end
+$scope begin Block45_8 $end
+$var reg 16 +" target_msb_pos [15:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module gen_lanes[9].u_lane $end
+$var wire 1 ) clk $end
+$var wire 1 * rst_n $end
+$var wire 1 ," load_input $end
+$var wire 1 -" iter_sel $end
+$var wire 1 ." we_result $end
+$var wire 8 /" elem_0_in [7:0] $end
+$var wire 8 0" elem_1_in [7:0] $end
+$var wire 8 1" micro_scale_in [7:0] $end
+$var reg 8 2" res_0_out [79:72] $end
+$var reg 8 3" res_1_out [79:72] $end
+$var reg 8 4" elem_0_buf [7:0] $end
+$var reg 8 5" elem_1_buf [7:0] $end
+$var reg 8 6" scale_buf [7:0] $end
+$var reg 8 7" mux_elem [7:0] $end
+$var reg 8 8" mult_result [7:0] $end
+$scope module u_mult $end
+$var wire 8 9" element_in [7:0] $end
+$var wire 8 :" scale_in [7:0] $end
+$var reg 8 8" result_out [7:0] $end
+$var reg 4 ;" lead_one_pos [3:0] $end
+$var reg 1 <" is_zero $end
+$scope begin Block45_8 $end
+$var reg 16 =" target_msb_pos [15:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module gen_lanes[10].u_lane $end
+$var wire 1 ) clk $end
+$var wire 1 * rst_n $end
+$var wire 1 >" load_input $end
+$var wire 1 ?" iter_sel $end
+$var wire 1 @" we_result $end
+$var wire 8 A" elem_0_in [7:0] $end
+$var wire 8 B" elem_1_in [7:0] $end
+$var wire 8 C" micro_scale_in [7:0] $end
+$var reg 8 D" res_0_out [87:80] $end
+$var reg 8 E" res_1_out [87:80] $end
+$var reg 8 F" elem_0_buf [7:0] $end
+$var reg 8 G" elem_1_buf [7:0] $end
+$var reg 8 H" scale_buf [7:0] $end
+$var reg 8 I" mux_elem [7:0] $end
+$var reg 8 J" mult_result [7:0] $end
+$scope module u_mult $end
+$var wire 8 K" element_in [7:0] $end
+$var wire 8 L" scale_in [7:0] $end
+$var reg 8 J" result_out [7:0] $end
+$var reg 4 M" lead_one_pos [3:0] $end
+$var reg 1 N" is_zero $end
+$scope begin Block45_8 $end
+$var reg 16 O" target_msb_pos [15:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module gen_lanes[11].u_lane $end
+$var wire 1 ) clk $end
+$var wire 1 * rst_n $end
+$var wire 1 P" load_input $end
+$var wire 1 Q" iter_sel $end
+$var wire 1 R" we_result $end
+$var wire 8 S" elem_0_in [7:0] $end
+$var wire 8 T" elem_1_in [7:0] $end
+$var wire 8 U" micro_scale_in [7:0] $end
+$var reg 8 V" res_0_out [95:88] $end
+$var reg 8 W" res_1_out [95:88] $end
+$var reg 8 X" elem_0_buf [7:0] $end
+$var reg 8 Y" elem_1_buf [7:0] $end
+$var reg 8 Z" scale_buf [7:0] $end
+$var reg 8 [" mux_elem [7:0] $end
+$var reg 8 \" mult_result [7:0] $end
+$scope module u_mult $end
+$var wire 8 ]" element_in [7:0] $end
+$var wire 8 ^" scale_in [7:0] $end
+$var reg 8 \" result_out [7:0] $end
+$var reg 4 _" lead_one_pos [3:0] $end
+$var reg 1 `" is_zero $end
+$scope begin Block45_8 $end
+$var reg 16 a" target_msb_pos [15:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module gen_lanes[12].u_lane $end
+$var wire 1 ) clk $end
+$var wire 1 * rst_n $end
+$var wire 1 b" load_input $end
+$var wire 1 c" iter_sel $end
+$var wire 1 d" we_result $end
+$var wire 8 e" elem_0_in [7:0] $end
+$var wire 8 f" elem_1_in [7:0] $end
+$var wire 8 g" micro_scale_in [7:0] $end
+$var reg 8 h" res_0_out [103:96] $end
+$var reg 8 i" res_1_out [103:96] $end
+$var reg 8 j" elem_0_buf [7:0] $end
+$var reg 8 k" elem_1_buf [7:0] $end
+$var reg 8 l" scale_buf [7:0] $end
+$var reg 8 m" mux_elem [7:0] $end
+$var reg 8 n" mult_result [7:0] $end
+$scope module u_mult $end
+$var wire 8 o" element_in [7:0] $end
+$var wire 8 p" scale_in [7:0] $end
+$var reg 8 n" result_out [7:0] $end
+$var reg 4 q" lead_one_pos [3:0] $end
+$var reg 1 r" is_zero $end
+$scope begin Block45_8 $end
+$var reg 16 s" target_msb_pos [15:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module gen_lanes[13].u_lane $end
+$var wire 1 ) clk $end
+$var wire 1 * rst_n $end
+$var wire 1 t" load_input $end
+$var wire 1 u" iter_sel $end
+$var wire 1 v" we_result $end
+$var wire 8 w" elem_0_in [7:0] $end
+$var wire 8 x" elem_1_in [7:0] $end
+$var wire 8 y" micro_scale_in [7:0] $end
+$var reg 8 z" res_0_out [111:104] $end
+$var reg 8 {" res_1_out [111:104] $end
+$var reg 8 |" elem_0_buf [7:0] $end
+$var reg 8 }" elem_1_buf [7:0] $end
+$var reg 8 ~" scale_buf [7:0] $end
+$var reg 8 !# mux_elem [7:0] $end
+$var reg 8 "# mult_result [7:0] $end
+$scope module u_mult $end
+$var wire 8 ## element_in [7:0] $end
+$var wire 8 $# scale_in [7:0] $end
+$var reg 8 "# result_out [7:0] $end
+$var reg 4 %# lead_one_pos [3:0] $end
+$var reg 1 &# is_zero $end
+$scope begin Block45_8 $end
+$var reg 16 '# target_msb_pos [15:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module gen_lanes[14].u_lane $end
+$var wire 1 ) clk $end
+$var wire 1 * rst_n $end
+$var wire 1 (# load_input $end
+$var wire 1 )# iter_sel $end
+$var wire 1 *# we_result $end
+$var wire 8 +# elem_0_in [7:0] $end
+$var wire 8 ,# elem_1_in [7:0] $end
+$var wire 8 -# micro_scale_in [7:0] $end
+$var reg 8 .# res_0_out [119:112] $end
+$var reg 8 /# res_1_out [119:112] $end
+$var reg 8 0# elem_0_buf [7:0] $end
+$var reg 8 1# elem_1_buf [7:0] $end
+$var reg 8 2# scale_buf [7:0] $end
+$var reg 8 3# mux_elem [7:0] $end
+$var reg 8 4# mult_result [7:0] $end
+$scope module u_mult $end
+$var wire 8 5# element_in [7:0] $end
+$var wire 8 6# scale_in [7:0] $end
+$var reg 8 4# result_out [7:0] $end
+$var reg 4 7# lead_one_pos [3:0] $end
+$var reg 1 8# is_zero $end
+$scope begin Block45_8 $end
+$var reg 16 9# target_msb_pos [15:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope module gen_lanes[15].u_lane $end
+$var wire 1 ) clk $end
+$var wire 1 * rst_n $end
+$var wire 1 :# load_input $end
+$var wire 1 ;# iter_sel $end
+$var wire 1 <# we_result $end
+$var wire 8 =# elem_0_in [7:0] $end
+$var wire 8 ># elem_1_in [7:0] $end
+$var wire 8 ?# micro_scale_in [7:0] $end
+$var reg 8 @# res_0_out [127:120] $end
+$var reg 8 A# res_1_out [127:120] $end
+$var reg 8 B# elem_0_buf [7:0] $end
+$var reg 8 C# elem_1_buf [7:0] $end
+$var reg 8 D# scale_buf [7:0] $end
+$var reg 8 E# mux_elem [7:0] $end
+$var reg 8 F# mult_result [7:0] $end
+$scope module u_mult $end
+$var wire 8 G# element_in [7:0] $end
+$var wire 8 H# scale_in [7:0] $end
+$var reg 8 F# result_out [7:0] $end
+$var reg 4 I# lead_one_pos [3:0] $end
+$var reg 1 J# is_zero $end
+$scope begin Block45_8 $end
+$var reg 16 K# target_msb_pos [15:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope begin Block83_86 $end
+$var reg 32 L# j [31:0] $end
+$upscope $end
+$upscope $end
+$scope begin Block90_90 $end
+$var reg 32 M# i [31:0] $end
+$scope begin Block90_91 $end
+$var reg 32 N# val_idx [31:0] $end
+$upscope $end
+$upscope $end
+$scope begin Block101_92 $end
+$var reg 32 O# lane [31:0] $end
+$upscope $end
+$scope begin Block118_93 $end
+$var reg 32 P# fail_count [31:0] $end
+$scope begin Block121_94 $end
+$var reg 32 Q# i [31:0] $end
+$scope begin Block121_95 $end
+$var reg 32 R# lane [31:0] $end
+$var reg 8 S# elem [7:0] $end
+$var reg 8 T# scale [7:0] $end
+$var reg 8 U# res [7:0] $end
+$var reg 8 V# exp [7:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope function calc_expected $end
+$var reg 8 W# calc_expected [7:0] $end
+$var reg 8 X# elem [7:0] $end
+$var reg 8 Y# scale [7:0] $end
+$var reg 4 Z# lead_one_pos [3:0] $end
+$var reg 16 [# target_msb_pos [15:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+0!
+b0 !!
+b0 !"
+b0 !#
+0"
+b0 "!
+b0 ""
+b0 "#
+0#
+b0 #!
+b0 #"
+b0 ##
+1$
+b0 $!
+b0 $"
+b0 $#
+b0 %
+b0 %!
+b0 %"
+b0 %#
+0&
+b0 &!
+b0 &"
+1&#
+0'
+b0 '!
+b0 '"
+bx '#
+b0 (
+b0 (!
+b0 ("
+0(#
+0)
+b0 )!
+b0 )"
+0)#
+0*
+b0 *!
+1*"
+0*#
+0+
+b0 +!
+bx +"
+b0 +#
+0,
+b0 ,!
+0,"
+b0 ,#
+0-
+b0 -!
+0-"
+b0 -#
+0.
+1.!
+0."
+b0 .#
+0/
+bx /!
+b0 /"
+b0 /#
+00
+00!
+b0 0"
+b0 0#
+b0 1
+01!
+b0 1"
+b0 1#
+b0 2
+02!
+b0 2"
+b0 2#
+b0 3
+b0 3!
+b0 3"
+b0 3#
+b0 4
+b0 4!
+b0 4"
+b0 4#
+b0 5
+b0 5!
+b0 5"
+b0 5#
+b0 6
+b0 6!
+b0 6"
+b0 6#
+b0 7
+b0 7!
+b0 7"
+b0 7#
+b0 8
+b0 8!
+b0 8"
+18#
+b0 9
+b0 9!
+b0 9"
+bx 9#
+b0 :
+b0 :!
+b0 :"
+0:#
+b0 ;
+b0 ;!
+b0 ;"
+0;#
+b0 <
+b0 <!
+1<"
+0<#
+b0 =
+b0 =!
+bx ="
+b0 =#
+b0 >
+b0 >!
+0>"
+b0 >#
+b0 ?
+b0 ?!
+0?"
+b0 ?#
+b0 @
+1@!
+0@"
+b0 @#
+b0 A
+bx A!
+b0 A"
+b0 A#
+b0 B
+0B!
+b0 B"
+b0 B#
+b0 C
+0C!
+b0 C"
+b0 C#
+b0 D
+0D!
+b0 D"
+b0 D#
+b0 E
+b0 E!
+b0 E"
+b0 E#
+0F
+b0 F!
+b0 F"
+b0 F#
+0G
+b0 G!
+b0 G"
+b0 G#
+0H
+b0 H!
+b0 H"
+b0 H#
+b0 I
+b0 I!
+b0 I"
+b0 I#
+b0 J
+b0 J!
+b0 J"
+1J#
+b0 K
+b0 K!
+b0 K"
+bx K#
+b0 L
+b0 L!
+b0 L"
+b0 L#
+b0 M
+b0 M!
+b0 M"
+b0 M#
+b0 N
+b0 N!
+1N"
+b0 N#
+b0 O
+b0 O!
+bx O"
+b0 O#
+b0 P
+b0 P!
+0P"
+b0 P#
+b0 Q
+b0 Q!
+0Q"
+b0 Q#
+b0 R
+1R!
+0R"
+b0 R#
+b0 S
+bx S!
+b0 S"
+bx S#
+b0 T
+0T!
+b0 T"
+bx T#
+b0 U
+0U!
+b0 U"
+bx U#
+1V
+0V!
+b0 V"
+bx V#
+bx W
+b0 W!
+b0 W"
+bx W#
+0X
+b0 X!
+b0 X"
+bx X#
+0Y
+b0 Y!
+b0 Y"
+bx Y#
+0Z
+b0 Z!
+b0 Z"
+bx Z#
+b0 [
+b0 [!
+b0 ["
+bx [#
+b0 \
+b0 \!
+b0 \"
+b0 ]
+b0 ]!
+b0 ]"
+b0 ^
+b0 ^!
+b0 ^"
+b0 _
+b0 _!
+b0 _"
+b0 `
+b0 `!
+1`"
+b0 a
+b0 a!
+bx a"
+b0 b
+b0 b!
+0b"
+b0 c
+b0 c!
+0c"
+b0 d
+1d!
+0d"
+b0 e
+bx e!
+b0 e"
+b0 f
+0f!
+b0 f"
+b0 g
+0g!
+b0 g"
+1h
+0h!
+b0 h"
+bx i
+b0 i!
+b0 i"
+0j
+b0 j!
+b0 j"
+0k
+b0 k!
+b0 k"
+0l
+b0 l!
+b0 l"
+b0 m
+b0 m!
+b0 m"
+b0 n
+b0 n!
+b0 n"
+b0 o
+b0 o!
+b0 o"
+b0 p
+b0 p!
+b0 p"
+b0 q
+b0 q!
+b0 q"
+b0 r
+b0 r!
+1r"
+b0 s
+b0 s!
+bx s"
+b0 t
+b0 t!
+0t"
+b0 u
+b0 u!
+0u"
+b0 v
+1v!
+0v"
+b0 w
+bx w!
+b0 w"
+b0 x
+0x!
+b0 x"
+b0 y
+0y!
+b0 y"
+1z
+0z!
+b0 z"
+bx {
+b0 {!
+b0 {"
+0|
+b0 |!
+b0 |"
+0}
+b0 }!
+b0 }"
+0~
+b0 ~!
+b0 ~"
+$end
+#5000
+1!
+1)
+#10000
+0!
+0)
+#15000
+1!
+1)
+#20000
+0!
+0)
+#25000
+1!
+1"
+1)
+1*
+#30000
+0!
+0)
+#35000
+1!
+b1111111 !!
+b11111111 "!
+1#
+1$
+b110000001100000011000000110000001000000010000000100000001000000001000000010000000100000001000000000000000000000000000000001111111101111111001111110001111100001111000001110000001100000001111111110111111100111111000111110000111100000111000000110000000111111111011111110011111100011111000011110000011100000011000000011111111101111111001111110001111100001111000001110000001100000001 %
+1(#
+1)
+1+
+b11111 +#
+1,"
+b111111 ,#
+1-
+b11 -#
+b111 /"
+10!
+b1111 0"
+b10 1"
+b1 3!
+b11 4!
+b1 5!
+b1 8
+b1 9
+b1 :
+1:#
+b1 ;
+b10 <
+b10 =
+b1111111 =#
+b10 >
+1>"
+b11111111 >#
+b10 ?
+b11 ?#
+b11 @
+b11 A
+b11111 A"
+b11 B
+1B!
+b111111 B"
+b11 C
+b10 C"
+b1 E
+b111 E!
+1F
+b1111 F!
+b1 G!
+b1 I
+b11 J
+b100000 M#
+b111 N#
+b10000 O#
+1P"
+b1111111 S"
+1T!
+b11111111 T"
+b10 U"
+b11111 W!
+1X
+b111111 X!
+b1 Y!
+b111 [
+b1111 \
+1b"
+b1 e"
+1f!
+b11 f"
+b11 g"
+b1111111 i!
+1j
+b11111111 j!
+b1 k!
+b11111 m
+b111111 n
+1t"
+b111 w"
+1x!
+b1111 x"
+b11 y"
+b1 {!
+1|
+b11 |!
+b10 }!
+#40000
+0!
+0)
+#45000
+1!
+b111 !#
+b1 ""
+b111000 "#
+0#
+b11 #"
+b111 ##
+0$
+b10 $"
+b11 $#
+b1 %"
+b10 %#
+b1111111 &!
+b100 &"
+0&#
+b11111111 '!
+b1 '"
+b101 '#
+b10 ("
+0(#
+1)
+b1111111 )!
+b1111111 *!
+0*"
+1*#
+0+
+b1111111 +!
+b10 +"
+0,"
+0-
+b110 -!
+1.
+0.!
+1."
+b110 /!
+00!
+b11111 0#
+b111111 1#
+12!
+b11 2#
+b11111 3#
+b111 4"
+b11111000 4#
+b1111 5"
+b11111 5#
+b10 6"
+b11 6#
+b111 7"
+b100 7#
+b1 8!
+b11100 8"
+08#
+b11 9!
+b111 9"
+b111 9#
+b1 :!
+b10 :"
+0:#
+b1 ;!
+b10 ;"
+b10 <!
+0<"
+1<#
+b1 =!
+b100 ="
+b1 >!
+0>"
+0@!
+1@"
+b1 A!
+0B!
+b1111111 B#
+b11111111 C#
+b1 D
+1D!
+b11 D#
+b10 E
+b1111111 E#
+0F
+b11111 F"
+b11111110 F#
+b111111 G"
+b1111111 G#
+1H
+b10 H"
+b11 H#
+b11111 I"
+b110 I#
+b111 J!
+b1111100 J"
+0J#
+b1111 K!
+b11111 K"
+b1001 K#
+b1 L!
+b10 L"
+b111 M!
+b100 M"
+b1 N
+b1110 N!
+0N"
+b11 O
+b111 O!
+b110 O"
+b1 P!
+0P"
+b1 Q
+b10 Q!
+b1 R
+0R!
+1R"
+b1 S
+b11 S!
+0T!
+0V
+1V!
+b0 W
+0X
+b1111111 X"
+b11111111 Y"
+1Z
+b10 Z"
+b1111111 ["
+b11111 \!
+b11111110 \"
+b111111 ]!
+b1111111 ]"
+b1 ^!
+b10 ^"
+b11111 _!
+b110 _"
+b111 `
+b111110 `!
+0`"
+b1111 a
+b11111 a!
+b1000 a"
+b1 b!
+0b"
+b111 c
+b100 c!
+b111 d
+0d!
+1d"
+b111 e
+b101 e!
+0f!
+b10 g
+0h
+1h!
+b10 i
+0j
+b1 j"
+b11 k"
+1l
+b11 l"
+b1 m"
+b1111111 n!
+b1000 n"
+b11111111 o!
+b1 o"
+b1 p!
+b11 p"
+b1111111 q!
+b11111 r
+b11111110 r!
+0r"
+b111111 s
+b1111111 s!
+b11 s"
+b1 t!
+0t"
+b11111 u
+b110 u!
+b11111 v
+0v!
+1v"
+b11111 w
+b111 w!
+0x!
+b100 y
+0z
+1z!
+b100 {
+0|
+b111 |"
+b1111 }"
+1~
+b11 ~"
+#50000
+0!
+0)
+#55000
+1!
+b1111 !#
+b1111000 "#
+b1111 ##
+b1111111 $!
+b11 %"
+b11 %#
+b1100 &"
+b11 '"
+b110 '#
+1)
+b11111111 )!
+b1 )"
+1)#
+b11111111 *!
+b11111111 +!
+b11 +"
+b111 -!
+1-"
+1.
+b11111000 .#
+1/
+b111 /!
+b11111110111110000011100000001000111111100111110000011100000001001111111000111110000011100000001001111111000111110000011100000001 1
+11!
+b11100 2"
+b111111 3#
+b11111100 4#
+b111111 5#
+b10 6!
+b1111 7"
+b101 7#
+b111100 8"
+b1111 9"
+b1000 9#
+b11 ;!
+b11 ;"
+1;#
+b110 <!
+b11 =!
+b101 ="
+b1 ?!
+1?"
+b11111110 @#
+b10 A!
+1C!
+b10 D
+b1111100 D"
+b11 E
+b11111111 E#
+b11111111 F#
+1G
+b11111111 G#
+b1110 H!
+b111111 I"
+b111 I#
+b11111100 J"
+b111111 K"
+b1010 K#
+b1 L
+b1111 M!
+b101 M"
+b11110 N!
+b1111 O!
+b111 O"
+b11 Q
+b11 Q!
+1Q"
+b11 R
+b11 S
+b100 S!
+b1 U
+1U!
+b11111110 V"
+b1 W
+1Y
+b111110 Z!
+b11111111 ["
+b11111111 \"
+b11111111 ]"
+b111 ^
+b111111 _!
+b111 _"
+b1111110 `!
+b111111 a!
+b1001 a"
+b1111 c
+b101 c!
+1c"
+b1111 d
+b1111 e
+b110 e!
+b11 g
+1g!
+b1000 h"
+b11 i
+1k
+b11111110 l!
+b11 m"
+b11000 n"
+b11 o"
+b11111 p
+b11111111 q!
+b1 q"
+b11111111 r!
+b11111111 s!
+b100 s"
+b111111 u
+b111 u!
+1u"
+b111111 v
+b111111 w
+b1000 w!
+b101 y
+1y!
+b111000 z"
+b101 {
+1}
+b100 ~!
+#60000
+0!
+0)
+#65000
+1!
+b1100 !"
+b111 !#
+b111000 "#
+b111 ##
+b11111111 %!
+b1 %"
+b10 %#
+b100 &"
+b1 '"
+b101 '#
+1)
+b1111111 )!
+b0 )"
+0)#
+b1111111 *!
+0*#
+b1111111 +!
+b10 +"
+b110 -!
+0-"
+0.
+0."
+0/
+b110 /!
+b11111100 /#
+10
+01!
+b11111111111111000111100000011000111111111111110000111100000011001111111101111110000111100000011011111111001111110000111100000011 2
+02!
+b111100 3"
+b11111 3#
+b11111000 4#
+b11111 5#
+b110 7!
+b111 7"
+b100 7#
+b11100 8"
+b111 9"
+b111 9#
+b1 ;!
+b10 ;"
+0;#
+b10 <!
+0<#
+b1 =!
+b100 ="
+b0 ?!
+0?"
+0@"
+b1 A!
+b11111111 A#
+0C!
+b11 D
+0D!
+b100 E
+b11111100 E"
+b1111111 E#
+b11111110 F#
+0G
+b1111111 G#
+0H
+b11110 I!
+b11111 I"
+b110 I#
+b1111100 J"
+b11111 K"
+b1001 K#
+b11 M
+b111 M!
+b100 M"
+b1110 N!
+b111 O!
+b110 O"
+b1 Q
+b10 Q!
+0Q"
+b1 R
+0R"
+b1 S
+b11 S!
+b0 U
+0U!
+0V!
+b0 W
+b11111111 W"
+0Y
+0Z
+b1111110 [!
+b1111111 ["
+b11111110 \"
+b1111111 ]"
+b1111 _
+b11111 _!
+b110 _"
+b111110 `!
+b11111 a!
+b1000 a"
+b111 c
+b100 c!
+0c"
+b111 d
+0d"
+b111 e
+b101 e!
+b10 g
+0g!
+0h!
+b10 i
+b11000 i"
+0k
+0l
+b11111111 m!
+b1 m"
+b1000 n"
+b1 o"
+b111111 q
+b1111111 q!
+b0 q"
+b11111110 r!
+b1111111 s!
+b11 s"
+b11111 u
+b110 u!
+0u"
+b11111 v
+0v"
+b11111 w
+b111 w!
+b100 y
+0y!
+0z!
+b100 {
+b1111000 {"
+0}
+0~
+#70000
+0!
+0)
+#75000
+1!
+1'
+b1111111111111110111111001111100001111000001110000001100000001000111111111111111011111100011111000011110000011100000011000000010011111111111111100111111000111110000111100000111000000110000000101111111101111111001111110001111100001111000001110000001100000001 (
+1)
+00
+b100 D
+b10000 L#
+#80000
+0!
+0)
+#85000
+1!
+1)
+#90000
+0!
+0)
+#95000
+1!
+1&
+1)
+1,
+b0 E
+b100000 Q#
+b1111 R#
+b11111111 S#
+b11 T#
+b11111111 U#
+b11111111 V#
+b11111111 W#
+b11111111 X#
+b11 Y#
+b111 Z#
+b1010 [#
+#100000
+0!
+0)
+#105000
+1!
+1$
+0&
+0'
+1)
+0,
+b0 D
+b0 E
+#110000
+0!
+0)
+#115000
+1!
+1)
+#120000
+0!
+0)
+#125000
+1!
+1)
+#130000
+0!
+0)
+#135000
+1!
+1)
+#140000
+0!
+0)
+#145000
+1!
+1)
+#150000
+0!
+0)
+#155000
+1!
+1)
+#160000
+0!
+0)
+#165000
+1!
+1)
+#170000
+0!
+0)
+#175000
+1!
+1)
+#180000
+0!
+0)
+#185000
+1!
+1)
+#190000
+0!
+0)
+#195000
+1!
+1)
+#200000
+0!
+0)
+#205000
+1!
+1)

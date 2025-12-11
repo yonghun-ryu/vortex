@@ -1,0 +1,1 @@
+-debug "typical" -top "tb_operand_transformer" -snapshot "tb_snapshot" 
